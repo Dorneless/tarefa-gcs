@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meus Lançamentos</title>
+    <style>
+        table { border-collapse: collapse; width: 90%; margin: 20px auto; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .btn { padding: 6px 12px; text-decoration: none; background: #007bff; color: white; border-radius: 4px; font-family: sans-serif; font-size: 14px;}
+        .btn-edit { background: #ffc107; color: black; }
+        .btn-delete { background: #dc3545; border: none; cursor: pointer; color: white; border-radius: 4px; padding: 6px 12px; font-size: 14px;}
+        .header { display: flex; justify-content: space-between; width: 90%; margin: 20px auto; align-items: center; font-family: sans-serif;}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>Registro de Despesas e Receitas</h2>
+        <a href="/create" class="btn">Novo Lançamento</a>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Data</th>
+            <th>Valor (R$)</th>
+            <th>Tipo</th>
+            <th>Situação</th>
+            <th>Ações</th>
+        </tr>
+        {% for lanc in lancamentos %}
+        <tr>
+            <td>{{ lanc['id'] }}</td>
+            <td>{{ lanc['descricao'] }}</td>
+            <td>{{ lanc['data_lancamento'] }}</td>
+            <td>{{ lanc['valor'] }}</td>
+            <td>{{ lanc['tipo_lancamento'] }}</td>
+            <td>{{ lanc['situacao'] }}</td>
+            <td>
+                <a href="/edit/{{ lanc['id'] }}" class="btn btn-edit">Editar</a>
+                <form action="/delete/{{ lanc['id'] }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

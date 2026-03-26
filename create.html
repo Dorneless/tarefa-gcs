@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>Novo Lançamento</title></head>
+<body style="font-family: sans-serif; width: 50%; margin: 40px auto;">
+    <h2>Adicionar Novo Lançamento</h2>
+    <form method="POST">
+        <label>Descrição:</label><br>
+        <input type="text" name="descricao" required style="width: 100%;"><br><br>
+
+        <label>Data:</label><br>
+        <input type="date" name="data_lancamento" required style="width: 100%;"><br><br>
+
+        <label>Valor (R$):</label><br>
+        <input type="number" step="0.01" name="valor" required style="width: 100%;"><br><br>
+
+        <label>Tipo:</label><br>
+        <select name="tipo_lancamento" style="width: 100%; padding: 5px;">
+            <option value="Despesa">Despesa</option>
+            <option value="Receita">Receita</option>
+        </select><br><br>
+
+        <label>Situação:</label><br>
+        <select name="situacao" style="width: 100%; padding: 5px;">
+            <option value="Pago">Pago</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Recebido">Recebido</option>
+        </select><br><br>
+
+        <button type="submit" style="padding: 10px 20px; background: #28a745; color: white; border: none; cursor: pointer;">Salvar</button>
+        <a href="/" style="margin-left: 10px; text-decoration: none; color: #dc3545;">Cancelar</a>
+    </form>
+</body>
+</html>

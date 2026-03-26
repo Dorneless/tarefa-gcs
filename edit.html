@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>Editar Lançamento</title></head>
+<body style="font-family: sans-serif; width: 50%; margin: 40px auto;">
+    <h2>Editar Lançamento #{{ lancamento['id'] }}</h2>
+    <form method="POST">
+        <label>Descrição:</label><br>
+        <input type="text" name="descricao" value="{{ lancamento['descricao'] }}" required style="width: 100%;"><br><br>
+
+        <label>Data:</label><br>
+        <input type="date" name="data_lancamento" value="{{ lancamento['data_lancamento'] }}" required style="width: 100%;"><br><br>
+
+        <label>Valor (R$):</label><br>
+        <input type="number" step="0.01" name="valor" value="{{ lancamento['valor'] }}" required style="width: 100%;"><br><br>
+
+        <label>Tipo:</label><br>
+        <select name="tipo_lancamento" style="width: 100%; padding: 5px;">
+            <option value="Despesa" {% if lancamento['tipo_lancamento'] == 'Despesa' %}selected{% endif %}>Despesa</option>
+            <option value="Receita" {% if lancamento['tipo_lancamento'] == 'Receita' %}selected{% endif %}>Receita</option>
+        </select><br><br>
+
+        <label>Situação:</label><br>
+        <select name="situacao" style="width: 100%; padding: 5px;">
+            <option value="Pago" {% if lancamento['situacao'] == 'Pago' %}selected{% endif %}>Pago</option>
+            <option value="Pendente" {% if lancamento['situacao'] == 'Pendente' %}selected{% endif %}>Pendente</option>
+            <option value="Recebido" {% if lancamento['situacao'] == 'Recebido' %}selected{% endif %}>Recebido</option>
+        </select><br><br>
+
+        <button type="submit" style="padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer;">Atualizar</button>
+        <a href="/" style="margin-left: 10px; text-decoration: none; color: #dc3545;">Cancelar</a>
+    </form>
+</body>
+</html>
