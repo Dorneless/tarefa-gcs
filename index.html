@@ -10,9 +10,14 @@
         .btn-edit { background: #ffc107; color: black; }
         .btn-delete { background: #dc3545; border: none; cursor: pointer; color: white; border-radius: 4px; padding: 6px 12px; font-size: 14px;}
         .header { display: flex; justify-content: space-between; width: 90%; margin: 20px auto; align-items: center; font-family: sans-serif;}
+        .user-info { font-family: sans-serif; text-align: right; width: 90%; margin: 10px auto; }
     </style>
 </head>
 <body>
+    <div class="user-info">
+        Olá, <strong>{{ nome_usuario }}</strong>! | <a href="/logout" style="color: red; text-decoration: none;">Sair do Sistema</a>
+    </div>
+
     <div class="header">
         <h2>Registro de Despesas e Receitas</h2>
         <a href="/create" class="btn">Novo Lançamento</a>
