@@ -2,7 +2,7 @@ name: CI/CD Pipeline GCS
 
 on:
   push:
-    branches: [main]
+    branches: [main, homolog]
   pull_request:
     branches: [main]
 
