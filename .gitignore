@@ -1,1 +1,17 @@
+# Segredos
 .env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Ambientes virtuais
+.venv/
+venv/
+
+# Banco SQLite legado (substituído por PostgreSQL + Flyway)
+*.sqlite

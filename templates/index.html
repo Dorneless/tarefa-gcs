@@ -22,6 +22,24 @@
         <h2>Registro de Despesas e Receitas</h2>
         <a href="/create" class="btn">Novo Lançamento</a>
     </div>
+
+    <div style="width: 90%; margin: 10px auto; font-family: sans-serif; display: flex; justify-content: space-between; align-items: center;">
+        <form method="GET" action="/" style="display: inline-flex; gap: 8px; align-items: center;">
+            <label>Data:</label>
+            <input type="date" name="data_filtro" value="{{ data_filtro }}">
+            <label>Situação:</label>
+            <select name="situacao_filtro">
+                <option value="">Todas</option>
+                <option value="Pago" {% if situacao_filtro == 'Pago' %}selected{% endif %}>Pago</option>
+                <option value="Pendente" {% if situacao_filtro == 'Pendente' %}selected{% endif %}>Pendente</option>
+                <option value="Recebido" {% if situacao_filtro == 'Recebido' %}selected{% endif %}>Recebido</option>
+            </select>
+            <button type="submit" class="btn">Filtrar</button>
+            <a href="/" class="btn" style="background: #6c757d;">Limpar</a>
+        </form>
+        <a href="/exportar_pdf" class="btn" style="background: #17a2b8;">Exportar PDF</a>
+    </div>
+
     <table>
         <tr>
             <th>ID</th>

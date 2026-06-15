@@ -1,0 +1,60 @@
+# Ambiente de PRODUÇÃO
+# Portas, banco e volume DIFERENTES da homologação.
+# Subir:  docker compose -f docker-compose.prod.yml up -d --build
+name: gcs-prod
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: gcs_db_prod
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: gcs_prod
+    ports:
+      - "5434:5432"
+    volumes:
+      - db_prod_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d gcs_prod"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Produção fica TRAVADA na versão base (FLYWAY_TARGET=1).
+  # Mesmo que a V2 exista na pasta migrations, ela NÃO é aplicada aqui
+  # automaticamente — prova de que homologação não "contamina" produção.
+  flyway:
+    image: flyway/flyway:10
+    container_name: gcs_flyway_prod
+    command: migrate
+    environment:
+      FLYWAY_URL: jdbc:postgresql://db:5432/gcs_prod
+      FLYWAY_USER: ${POSTGRES_USER}
+      FLYWAY_PASSWORD: ${POSTGRES_PASSWORD}
+      FLYWAY_LOCATIONS: filesystem:/flyway/sql
+      FLYWAY_CONNECT_RETRIES: "20"
+      FLYWAY_TARGET: "1"
+    volumes:
+      - ./migrations:/flyway/sql
+    depends_on:
+      db:
+        condition: service_healthy
+
+  app:
+    build: .
+    container_name: gcs_app_prod
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/gcs_prod
+      SECRET_KEY: ${SECRET_KEY}
+      MAIL_SERVER: ${MAIL_SERVER:-smtp.gmail.com}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+    ports:
+      - "5002:5000"
+    depends_on:
+      flyway:
+        condition: service_completed_successfully
+
+volumes:
+  db_prod_data:
