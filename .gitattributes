@@ -1,0 +1,2 @@
+# Scripts shell sempre com LF (evita erro de "bad interpreter / \r" no Linux)
+*.sh text eol=lf

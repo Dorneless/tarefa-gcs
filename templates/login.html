@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login do Sistema</title>
+</head>
+<body style="font-family: sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+    <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 300px; text-align: center;">
+        <h2>Acesso ao Sistema</h2>
+        
+        {% if erro %}
+            <p style="color: red; font-size: 14px;">{{ erro }}</p>
+        {% endif %}
+
+        <form method="POST">
+            <label style="display: block; text-align: left; margin-bottom: 5px;">Login:</label>
+            <input type="text" name="login" required style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+
+            <label style="display: block; text-align: left; margin-bottom: 5px;">Senha:</label>
+            <input type="password" name="senha" required style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+
+            <button type="submit" style="width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Entrar</button>
+        </form>
+    </div>
+</body>
+</html>
