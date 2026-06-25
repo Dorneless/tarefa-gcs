@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Sobe o ambiente de PRODUCAO em background (build + up -d).
+# Sobe o ambiente de PRODUCAO (build + up -d) e aplica as migrations.
+# Aplica ate a V2 (tabela categoria) quando ela existir na pasta migrations,
+# entao rodar este script ja "promove" a V2 para producao.
 set -e
 cd "$(dirname "$0")"
 
@@ -10,6 +12,10 @@ fi
 
 echo ">> Subindo PRODUCAO (o primeiro build pode demorar um pouco)..."
 docker compose -f docker-compose.prod.yml up -d --build
+
+echo ""
+echo ">> Aplicando migrations em PRODUCAO (sobe ate a V2/categoria quando existir)..."
+docker compose -f docker-compose.prod.yml run --rm -e FLYWAY_TARGET=2 flyway migrate
 
 echo ""
 echo "PRODUCAO no ar:"
