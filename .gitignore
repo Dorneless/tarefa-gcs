@@ -15,3 +15,6 @@ venv/
 
 # Banco SQLite legado (substituído por PostgreSQL + Flyway)
 *.sqlite
+
+# Ignorar configurações locais de IAs
+.claude/
