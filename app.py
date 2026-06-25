@@ -1,5 +1,4 @@
 import os
-import sys
 from io import BytesIO
 
 from dotenv import load_dotenv
